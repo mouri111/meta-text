@@ -10,6 +10,20 @@ pub enum Token {
     DELIMITER(Vec<char>),
     STRING(Vec<char>),
 }
+
+#[derive(Debug,PartialEq,Eq,Clone)]
+pub enum AST {
+    Seq(Vec<Box<AST>>),
+    String(Token),
+    Empty
+}
+
+impl AST {
+    pub fn new() -> AST {
+        AST::Empty
+    }
+}
+
 pub fn render(ss: String) -> String {
     unimplemented!();
 }
