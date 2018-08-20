@@ -24,17 +24,13 @@ fn test_read_file() {
 }
 
 #[test]
-fn test_2() {
-    let input = read_file("tests/testcases/in001.etxt");
-    let exp_output = read_file("tests/testcases/out001.txt");
-    let output = etxt::render(input);
-    assert_eq!(exp_output, output);
-}
-
-#[test]
-fn test_3() {
-    let input = read_file("tests/testcases/in002.etxt");
-    let exp_output = read_file("tests/testcases/out002.txt");
-    let output = etxt::render(input);
-    assert_eq!(exp_output, output);
+fn test_4() {
+    for i in 1..2+1 {
+        let input_filename = format!("tests/testcases/in{: >03}.etxt", i);
+        let input = read_file(input_filename.as_str());
+        let exp_output_filename = format!("tests/testcases/out{: >03}.txt", i);
+        let exp_output = read_file(exp_output_filename.as_str());
+        let output = etxt::render(input);
+        assert_eq!(exp_output, output);
+    }
 }
