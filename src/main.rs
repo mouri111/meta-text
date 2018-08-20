@@ -1,3 +1,6 @@
+extern crate etxt;
+use etxt::*;
+
 fn main() {
-    println!("Hello, world!");
+    entry();
 }
