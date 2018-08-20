@@ -30,3 +30,11 @@ fn test_2() {
     let output = etxt::render(input);
     assert_eq!(exp_output, output);
 }
+
+#[test]
+fn test_3() {
+    let input = read_file("tests/testcases/in002.etxt");
+    let exp_output = read_file("tests/testcases/out002.txt");
+    let output = etxt::render(input);
+    assert_eq!(exp_output, output);
+}
