@@ -134,6 +134,36 @@ pub fn parse(ts: Vec<Token>) -> AST {
     let res = AST::Seq(xs);
     res
 }
+
+pub fn render_dfs(ast: &AST, buf: &mut String) {
+    match ast {
+        AST::Seq(xs) => {
+            for x in xs.iter() {
+                render_dfs(x, buf);
+            }
+        }
+        AST::String(token) => {
+            match token {
+                Token::STRING(ss) => {
+                    let n = ss.len();
+                    for i in 1..n-1 {
+                        buf.push(ss[i]);
+                    }
+                }
+                _ => {
+                }
+            }
+        }
+        AST::Empty => {
+        }
+    }
+}
+
 pub fn render(ss: String) -> String {
-    unimplemented!();
+    let ts = lex(ss);
+    let ast = parse(ts);
+    eprintln!("{:?}", ast);
+    let mut buf = String::new();
+    render_dfs(&ast, &mut buf);
+    buf
 }
