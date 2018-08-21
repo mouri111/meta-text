@@ -19,7 +19,6 @@ fn read_file(filename: &str) -> String {
 #[test]
 fn test_read_file() {
     let ss = read_file("tests/testcases/001.in.etxt");
-    eprintln!("{}", ss);
     assert_eq!(ss, "\"abcd\\n\";\n");
 }
 
