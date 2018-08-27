@@ -387,6 +387,18 @@ pub fn gen_default_precedence_table() -> BTreeMap<Vec<char>, Precedence> {
     map
 }
 
+#[test]
+fn test_eval_expression() {
+    let ss: Vec<char> = "1 + 2 * 3".to_string().chars().collect();
+    let ts = lex(&ss);
+    let table = gen_default_precedence_table();
+    let mut p = ts.iter().peekable();
+    let exp = parse_expression(&mut p, &table);
+    let t = eval_expression(&exp);
+    eprintln!("{:?}", &exp);
+    assert_eq!(t, Value::Num(7));
+}
+
 pub fn render_dfs(ast: &AST, buf: &mut String, prec_table: &mut BTreeMap<Vec<char>, Precedence>) {
     match ast {
         AST::Seq(xs) => {
