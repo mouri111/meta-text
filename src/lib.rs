@@ -8,7 +8,7 @@ pub enum Token {
     NUM(Vec<char>),
     OP(Vec<char>),
     DELIMITER(Vec<char>),
-    STRING(Vec<char>),
+    STRING(Vec<char>)
 }
 
 #[derive(Debug,PartialEq,Eq,Clone)]
