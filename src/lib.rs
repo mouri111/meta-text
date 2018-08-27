@@ -196,6 +196,11 @@ pub fn parse(ts: Vec<Token>) -> AST {
 }
 
 pub fn render_dfs(ast: &AST, buf: &mut String) {
+#[derive(PartialEq,Eq,Debug)]
+pub enum Value {
+    Num(i64),
+}
+
 pub fn gen_default_precedence_table() -> BTreeMap<Vec<char>, Precedence> {
     let mut map = BTreeMap::new();
     let plus_chars: Vec<char> = "+".to_string().chars().collect();
