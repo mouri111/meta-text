@@ -444,6 +444,7 @@ pub fn render(ss: String) -> String {
     let ast = parse(ts);
     eprintln!("{:?}", ast);
     let mut buf = String::new();
-    render_dfs(&ast, &mut buf);
+    let mut prec_table = gen_default_precedence_table();
+    render_dfs(&ast, &mut buf, &mut prec_table);
     buf
 }
