@@ -179,6 +179,10 @@ use std::collections::BTreeMap;
 use std::slice::Iter;
 use std::iter::Peekable;
 
+pub fn parse_expression(iter: &mut Peekable<Iter<Token>>, precedence_table: &BTreeMap<Vec<char>,Precedence>) -> Expression {
+    parse_expression_sub(iter, precedence_table, None)
+}
+
 pub fn parse_atom(iter: &mut Peekable<Iter<Token>>, precedence_table: &BTreeMap<Vec<char>, Precedence>) -> Expression {
     if let Some(head) = iter.peek() {
         match head {
