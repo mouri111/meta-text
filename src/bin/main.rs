@@ -1,5 +1,5 @@
 extern crate etxt;
-use etxt::*;
+use etxt::sandbox::*;
 
 fn main() {
     entry();

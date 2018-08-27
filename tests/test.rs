@@ -2,7 +2,7 @@ extern crate etxt;
 
 use std::fs;
 use std::io::{Read};
-use etxt::*;
+use etxt::sandbox::*;
 
 #[test]
 fn test_1() {
@@ -29,7 +29,7 @@ fn test_4() {
         let input = read_file(input_filename.as_str());
         let exp_output_filename = format!("tests/testcases/{: >03}.out.txt", i);
         let exp_output = read_file(exp_output_filename.as_str());
-        let output = etxt::render(input);
+        let output = render(input);
         assert_eq!(exp_output, output);
     }
 }
