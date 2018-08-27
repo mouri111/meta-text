@@ -12,6 +12,13 @@ pub enum Token {
 }
 
 #[derive(Debug,PartialEq,Eq,Clone)]
+pub enum Expression {
+    BinaryOp(Box<Expression>,Token,Box<Expression>),
+    UnaryOp(Token,Box<Expression>),
+    Literal(Token)
+}
+
+#[derive(Debug,PartialEq,Eq,Clone)]
 pub enum AST {
     Seq(Vec<Box<AST>>),
     String(Token),
