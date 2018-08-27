@@ -6,6 +6,7 @@ use types::token::*;
 use types::expression::*;
 use types::ast::*;
 use types::precedence::*;
+use types::value::*;
 
 use lexer::*;
 
@@ -13,11 +14,6 @@ use std::collections::BTreeMap;
 
 use parser::expression::*;
 use parser::*;
-
-#[derive(PartialEq,Eq,Debug)]
-pub enum Value {
-    Num(i64),
-}
 
 pub fn eval_literal(token: &Token) -> Value {
     match token {
