@@ -281,7 +281,6 @@ pub fn parse(ts: Vec<Token>) -> AST {
     res
 }
 
-pub fn render_dfs(ast: &AST, buf: &mut String) {
 #[derive(PartialEq,Eq,Debug)]
 pub enum Value {
     Num(i64),
@@ -388,23 +387,51 @@ pub fn gen_default_precedence_table() -> BTreeMap<Vec<char>, Precedence> {
     map
 }
 
+pub fn render_dfs(ast: &AST, buf: &mut String, prec_table: &mut BTreeMap<Vec<char>, Precedence>) {
     match ast {
         AST::Seq(xs) => {
             for x in xs.iter() {
-                render_dfs(x, buf);
+                render_dfs(x, buf, prec_table);
             }
         }
         AST::String(token) => {
             match token {
                 Token::STRING(ss) => {
                     let n = ss.len();
+                    let mut exp_buf: Vec<char> = vec![];
+                    let mut exp_mode = false;
                     for i in 1..n-1 {
-                        buf.push(ss[i]);
+                        if ss[i] == '{' {
+                            exp_mode = true;
+                        }
+                        else if ss[i] == '}' {
+                            let ts = lex(&exp_buf);
+                            let mut p = ts.iter().peekable();
+                            let exp = parse_expression(&mut p, &prec_table);
+                            let t = eval_expression(&exp);
+                            match t {
+                                Value::Num(n) => {
+                                    for c in n.to_string().chars() {
+                                        buf.push(c);
+                                    }
+                                }
+                            }
+                            exp_buf.clear();
+                            exp_mode = false;
+                        }
+                        else if exp_mode {
+                            exp_buf.push(ss[i]);
+                        }
+                        else {
+                            buf.push(ss[i]);
+                        }
                     }
                 }
                 _ => {
                 }
             }
+        }
+        AST::Expression(_) => {
         }
         AST::Empty => {
         }
