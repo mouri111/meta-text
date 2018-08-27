@@ -44,8 +44,7 @@ fn is_ident_char(c: char) -> bool {
     c.is_alphanumeric() || c == '\'' || c == '_'
 }
 
-fn lex(ss: String) -> Vec<Token> {
-    let ss: Vec<char> = ss.chars().collect();
+fn lex(ss: &Vec<char>) -> Vec<Token> {
     let mut res = Vec::<Token>::new();
     let mut i = 0;
     while i < ss.len() {
@@ -160,7 +159,8 @@ pub fn render_dfs(ast: &AST, buf: &mut String) {
 }
 
 pub fn render(ss: String) -> String {
-    let ts = lex(ss);
+    let ss = ss.chars().collect();
+    let ts = lex(&ss);
     let ast = parse(ts);
     eprintln!("{:?}", ast);
     let mut buf = String::new();
