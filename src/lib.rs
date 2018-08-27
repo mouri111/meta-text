@@ -22,6 +22,7 @@ pub enum Expression {
 pub enum AST {
     Seq(Vec<Box<AST>>),
     String(Token),
+    Expression(Box<Expression>),
     Empty
 }
 
