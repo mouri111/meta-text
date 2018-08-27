@@ -4,6 +4,11 @@ use std::fs;
 use std::io::{Read};
 use etxt::sandbox::*;
 
+use etxt::types::value::*;
+use etxt::lexer::lex;
+use etxt::eval::*;
+use etxt::parser::expression::*;
+
 #[test]
 fn test_1() {
     entry();
@@ -32,4 +37,16 @@ fn test_4() {
         let output = render(input);
         assert_eq!(exp_output, output);
     }
+}
+
+#[test]
+fn test_eval_expression() {
+    let ss: Vec<char> = "1 + 2 * 3".to_string().chars().collect();
+    let ts = lex(&ss);
+    let table = gen_default_precedence_table();
+    let mut p = ts.iter().peekable();
+    let exp = parse_expression(&mut p, &table);
+    let t = eval_expression(&exp);
+    eprintln!("{:?}", &exp);
+    assert_eq!(t, Value::Num(7));
 }
