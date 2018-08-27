@@ -8,6 +8,7 @@ use etxt::types::value::*;
 use etxt::lexer::lex;
 use etxt::eval::*;
 use etxt::parser::expression::*;
+use etxt::render::render;
 
 #[test]
 fn test_1() {
