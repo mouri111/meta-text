@@ -175,6 +175,10 @@ impl Precedence {
     }
 }
 
+use std::collections::BTreeMap;
+use std::slice::Iter;
+use std::iter::Peekable;
+
 pub fn parse(ts: Vec<Token>) -> AST {
     let mut xs = vec![];
     let mut iter = ts.iter();
