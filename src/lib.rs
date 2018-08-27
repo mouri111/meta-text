@@ -196,6 +196,21 @@ pub fn parse(ts: Vec<Token>) -> AST {
 }
 
 pub fn render_dfs(ast: &AST, buf: &mut String) {
+pub fn gen_default_precedence_table() -> BTreeMap<Vec<char>, Precedence> {
+    let mut map = BTreeMap::new();
+    let plus_chars: Vec<char> = "+".to_string().chars().collect();
+    let minus_chars: Vec<char> = "-".to_string().chars().collect();
+    let mul_chars: Vec<char> = "*".to_string().chars().collect();
+    let div_chars: Vec<char> = "/".to_string().chars().collect();
+    let mod_chars: Vec<char> = "%".to_string().chars().collect();
+    map.insert(plus_chars, Precedence::LeftAssociative(1));
+    map.insert(minus_chars, Precedence::LeftAssociative(1));
+    map.insert(mul_chars, Precedence::LeftAssociative(2));
+    map.insert(div_chars, Precedence::LeftAssociative(2));
+    map.insert(mod_chars, Precedence::LeftAssociative(2));
+    map
+}
+
     match ast {
         AST::Seq(xs) => {
             for x in xs.iter() {
