@@ -2,8 +2,8 @@ extern crate etxt;
 
 use std::fs;
 use std::io::{Read};
-use etxt::sandbox::*;
 
+use etxt::entry::*;
 use etxt::types::value::*;
 use etxt::lexer::lex;
 use etxt::eval::*;
