@@ -1,6 +1,6 @@
 [package]
 name = "etxt"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Masato Mouri <13274198+mouri111@users.noreply.github.com>"]
 
 [dependencies]

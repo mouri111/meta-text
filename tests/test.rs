@@ -2,7 +2,13 @@ extern crate etxt;
 
 use std::fs;
 use std::io::{Read};
-use etxt::*;
+
+use etxt::entry::*;
+use etxt::types::value::*;
+use etxt::lexer::lex;
+use etxt::eval::*;
+use etxt::parser::expression::*;
+use etxt::render::render;
 
 #[test]
 fn test_1() {
@@ -19,18 +25,29 @@ fn read_file(filename: &str) -> String {
 #[test]
 fn test_read_file() {
     let ss = read_file("tests/testcases/001.in.etxt");
-    eprintln!("{}", ss);
     assert_eq!(ss, "\"abcd\\n\";\n");
 }
 
 #[test]
 fn test_4() {
-    for i in 1..2+1 {
+    for i in 1..10+1 {
         let input_filename = format!("tests/testcases/{: >03}.in.etxt", i);
         let input = read_file(input_filename.as_str());
         let exp_output_filename = format!("tests/testcases/{: >03}.out.txt", i);
         let exp_output = read_file(exp_output_filename.as_str());
-        let output = etxt::render(input);
+        let output = render(input);
         assert_eq!(exp_output, output);
     }
+}
+
+#[test]
+fn test_eval_expression() {
+    let ss: Vec<char> = "1 + 2 * 3".to_string().chars().collect();
+    let ts = lex(&ss);
+    let table = gen_default_precedence_table();
+    let mut p = ts.iter().peekable();
+    let exp = parse_expression(&mut p, &table);
+    let t = eval_expression(&exp);
+    eprintln!("{:?}", &exp);
+    assert_eq!(t, Value::Num(7));
 }
