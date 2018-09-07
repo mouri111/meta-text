@@ -1,14 +1,14 @@
-extern crate etxt;
+extern crate meta_text;
 
 use std::fs;
 use std::io::{Read};
 
-use etxt::entry::*;
-use etxt::types::value::*;
-use etxt::lexer::lex;
-use etxt::eval::*;
-use etxt::parser::expression::*;
-use etxt::render::render;
+use meta_text::entry::*;
+use meta_text::types::value::*;
+use meta_text::lexer::lex;
+use meta_text::eval::*;
+use meta_text::parser::expression::*;
+use meta_text::render::render;
 
 #[test]
 fn test_1() {

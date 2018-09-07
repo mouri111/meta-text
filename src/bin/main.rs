@@ -1,5 +1,5 @@
-extern crate etxt;
-use etxt::entry::*;
+extern crate meta_text;
+use meta_text::entry::*;
 
 fn main() {
     entry();
