@@ -1,14 +1,14 @@
-extern crate etxt;
+extern crate meta_text;
 
 use std::fs;
 use std::io::{Read};
 
-use etxt::entry::*;
-use etxt::types::value::*;
-use etxt::lexer::lex;
-use etxt::eval::*;
-use etxt::parser::expression::*;
-use etxt::render::render;
+use meta_text::entry::*;
+use meta_text::types::value::*;
+use meta_text::lexer::lex;
+use meta_text::eval::*;
+use meta_text::parser::expression::*;
+use meta_text::render::render;
 
 #[test]
 fn test_1() {
@@ -24,16 +24,16 @@ fn read_file(filename: &str) -> String {
 
 #[test]
 fn test_read_file() {
-    let ss = read_file("tests/testcases/001.in.etxt");
+    let ss = read_file("tests/testcases/001-in.mt");
     assert_eq!(ss, "\"abcd\\n\";\n");
 }
 
 #[test]
 fn test_4() {
     for i in 1..10+1 {
-        let input_filename = format!("tests/testcases/{: >03}.in.etxt", i);
+        let input_filename = format!("tests/testcases/{: >03}-in.mt", i);
         let input = read_file(input_filename.as_str());
-        let exp_output_filename = format!("tests/testcases/{: >03}.out.txt", i);
+        let exp_output_filename = format!("tests/testcases/{: >03}-out.txt", i);
         let exp_output = read_file(exp_output_filename.as_str());
         let output = render(input);
         assert_eq!(exp_output, output);

@@ -1,3 +1,3 @@
-# etxt
+# meta-text
 
-[![Build Status](https://travis-ci.com/mouri111/etxt.svg?branch=master)](https://travis-ci.com/mouri111/etxt)
+[![Build Status](https://travis-ci.com/mouri111/meta-text.svg?branch=master)](https://travis-ci.com/mouri111/meta-text)

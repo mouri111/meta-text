@@ -1,9 +1,9 @@
 #![feature(test)]
 
-extern crate etxt;
+extern crate meta_text;
 extern crate test;
 
-use etxt::*;
+use meta_text::entry::*;
 use test::Bencher;
 
 #[bench]
