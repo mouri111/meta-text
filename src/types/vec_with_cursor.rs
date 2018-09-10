@@ -11,17 +11,21 @@ impl<'a, T> VecWithCursor<'a, T> {
             p: 0
         }
     }
-    pub fn next(&self) -> Option<(&'a T, VecWithCursor<'a, T>)> {
+    pub fn next(&self) -> Result<(&'a T, VecWithCursor<'a, T>), VecWithCursor<'a, T>> {
         if self.p < self.xs.len() {
             let x = &self.xs[self.p];
             let xs = VecWithCursor {
                 xs: self.xs,
                 p: self.p + 1
             };
-            Some((x,xs))
+            Ok((x,xs))
         }
         else {
-            None
+            let res = VecWithCursor {
+                xs: self.xs,
+                p: self.p
+            };
+            Err(res)
         }
     }
     pub fn is_terminal(&self) -> bool {
@@ -39,5 +43,6 @@ fn test_next() {
     assert_eq!(2, *x);
     let (x, xs) = xs.next().unwrap();
     assert_eq!(3, *x);
-    assert!(xs.next().is_none());
+    assert!(xs.next().is_err());
+    assert!(xs.is_terminal());
 }
