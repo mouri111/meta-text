@@ -12,7 +12,17 @@ impl<'a, T> VecWithCursor<'a, T> {
         }
     }
     pub fn next(&self) -> Option<(&'a T, VecWithCursor<'a, T>)> {
-        unimplemented!();
+        if self.p < self.xs.len() {
+            let x = &self.xs[self.p];
+            let xs = VecWithCursor {
+                xs: self.xs,
+                p: self.p + 1
+            };
+            Some((x,xs))
+        }
+        else {
+            None
+        }
     }
 }
 
