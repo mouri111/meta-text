@@ -1,5 +1,5 @@
 #[derive(Debug,PartialEq,Eq,Clone)]
-pub struct VecWithCursor<T> {
-    xs: Vec<T>,
+pub struct VecWithCursor<'a, T: 'a> {
+    xs: &'a Vec<T>,
     p: usize,
 }
