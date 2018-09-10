@@ -24,6 +24,9 @@ impl<'a, T> VecWithCursor<'a, T> {
             None
         }
     }
+    pub fn is_terminal(&self) -> bool {
+        self.p >= self.xs.len()
+    }
 }
 
 #[test]
