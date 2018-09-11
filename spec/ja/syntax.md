@@ -70,9 +70,23 @@ expression
     <- expression symbol expression
 ```
 
+statement
+---
+```
+statement
+    <- string ';'
+```
+
+関数定義
+---
+```
+function_definition
+    <- 'fn' identifier '(' ')' '{' statement* '}'
+```
+
 program
 ---
 ```
 program
-    <- (string ';')*
+    <- function_definition*
 ```
