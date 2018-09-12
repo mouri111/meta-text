@@ -6,3 +6,4 @@ pub mod function_definition;
 pub mod primary_expression;
 pub mod program;
 pub mod statement;
+pub mod identifier;

@@ -31,6 +31,18 @@ impl<'a, T> VecWithCursor<'a, T> {
     pub fn is_terminal(&self) -> bool {
         self.p >= self.xs.len()
     }
+    pub fn take_while<P>(&self, predicate: P) -> (&'a [T], VecWithCursor<'a, T>)
+        where P: FnMut(&T) -> bool {
+        let l = self.p;
+        let mut r = self.p;
+        while r < self.xs.len() && predicate(&self.xs[r]) {
+            r += 1;
+        }
+        (&self.xs[l..r], VecWithCursor {
+            xs: self.xs,
+            p: r
+        })
+    }
 }
 
 #[test]
