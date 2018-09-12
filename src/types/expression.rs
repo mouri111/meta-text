@@ -1,8 +1,10 @@
-use types::token::*;
+use types::primary_expression::*;
 
-#[derive(Debug,PartialEq,Eq,Clone)]
-pub enum Expression {
-    BinaryOp(Box<Expression>,Token,Box<Expression>),
-    UnaryOp(Token,Box<Expression>),
-    Literal(Token)
+pub enum Expression<'a> {
+    PrimaryExpression(Box<PrimaryExpression<'a>>),
+    BinOp {
+        left: Box<Expression<'a>>,
+        op: &'a [char],
+        right: Box<Expression<'a>>
+    }
 }
